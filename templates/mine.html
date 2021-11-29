@@ -1,0 +1,333 @@
+{% load static %}
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>my news</title>
+    <meta name="description" content="Core HTML Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/select2/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/owlcarousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/lightcase/lightcase.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+ .dropbtn {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-left: 50px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+body {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  height:48px;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400|Work+Sans:300,400,700" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link href="https://file.myfontastic.com/7vRKgqrN3iFEnLHuqYhYuL/icons.css" rel="stylesheet">
+
+    <!-- Modernizr JS for IE8 support of HTML5 elements and media queries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+
+</head>
+<body data-spy="scroll" data-target="#navbar-nav-header" class="static-layout">
+	<div class="boxed-page">
+		<nav id="gtco-header-navbar" class="navbar navbar-expand-lg py-4">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbar-nav-header">
+            {% if user.is_authenticated %}
+            <center><h2>hi  {{user.username}}</h2></center>
+            {% endif %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="new" ><p style="background-color:yellow;color:red;"><b>Add News</b></p></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+</nav>
+    <div class="jumbotron d-flex align-items-center" style="background-image: url({% static 'img/newsbg.jpg' %})">
+
+    <div class="container text-center">
+    <h1 class="display-2 mb-4">Hello, world!</h1>
+    <p>
+      STAY CONNECTED FOR LATEST NEWS
+    </p>
+      <form class="example" action="{%url 'search' %}" style="margin:auto;max-width:300px">
+  <input type="text" placeholder="place or news type" name="q">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+
+  </div>
+</div>
+
+
+<section id="gtco-blog" class="bg-grey">
+<!--      <div class="dropdown">-->
+<!--                <button class="dropbtn">FILTER</button>-->
+<!--                <div class="dropdown-content">-->
+<!--                    <a href="/">ALL</a>-->
+<!--                    {% for i in n %}-->
+<!--                    <a href={{i.get_url}}>{{i.category}}</a>-->
+<!--                    {% endfor %}-->
+<!--                </div>-->
+<!--     </div>-->
+    <div class="container">
+        <div class="section-content">
+            <div class="title-wrap mb-5">
+                <h2 class="section-title">Latest <b>news</b></h2>
+            </div>
+            <div class="row">
+                <!-- Blog -->
+                <div class="col-md-12 blog-holder">
+                    <div class="row">
+                        <!-- Blog Item -->
+<!--                        <div class="col-md-4 blog-item-wrapper">-->
+<!--                            <div class="blog-item">-->
+<!--                                <div class="blog-img">-->
+<!--                                    <a href="single.html"><img src="{% static 'img/blog-1.jpg' %}" alt=""></a>-->
+<!--                                </div>-->
+<!--                                <div class="blog-text">-->
+<!--                                    <div class="blog-tag">-->
+<!--                                        <a href="#"><h6><small>CODE</small></h6></a>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-title">-->
+<!--                                        <a href="single.html"><h4>Amazing Blog Title</h4></a>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-meta">-->
+<!--                                        <p class="blog-date">30 May 2016</p> /-->
+<!--                                        <p class="blog-comment"><a href="">23 Comments</a></p>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-desc">-->
+<!--                                        <p>Lorem ipsum dolor sit amet con sectetur adipiscing elit sed do eiu smod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-author">-->
+<!--                                        <p>by John Doe</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-share-wrapper">-->
+<!--                                        <a class="blog-share" href="google.com">-->
+<!--                                            <i class="fab fa-facebook-square"></i>-->
+<!--                                        </a>-->
+<!--                                        <a class="blog-share" href="google.com">-->
+<!--                                            <i class="fab fa-twitter-square"></i>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; End of Blog Item &ndash;&gt;-->
+<!--                        &lt;!&ndash; Blog Item &ndash;&gt;-->
+<!--                        <div class="col-md-4 blog-item-wrapper">-->
+<!--                            <div class="blog-item">-->
+<!--                                <div class="blog-img">-->
+<!--                                    <a href="#"><img src="{% static 'img/blog-2.jpg' %}" alt=""></a>-->
+<!--                                </div>-->
+<!--                                <div class="blog-text">-->
+<!--                                    <div class="blog-tag">-->
+<!--                                        <a href="#"><h6><small>SPORTS</small></h6></a>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-title">-->
+<!--                                        <a href="#"><h4>Amazing Blog Title</h4></a>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-meta">-->
+<!--                                        <p class="blog-date">30 May 2016</p> /-->
+<!--                                        <p class="blog-comment"><a href="">23 Comments</a></p>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-desc">-->
+<!--                                        <p>Lorem ipsum dolor sit amet con sectetur adipiscing elit sed do eiu smod tempor incididunt ut labore et dolore magna aliqua.</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-author">-->
+<!--                                        <p>by John Doe</p>-->
+<!--                                    </div>-->
+<!--                                    <div class="blog-share-wrapper">-->
+<!--                                        <a class="blog-share" href="google.com">-->
+<!--                                            <i class="fab fa-facebook-square"></i>-->
+<!--                                        </a>-->
+<!--                                        <a class="blog-share" href="google.com">-->
+<!--                                            <i class="fab fa-twitter-square"></i>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; End of Blog Item &ndash;&gt;-->
+<!--                        &lt;!&ndash; Blog Item &ndash;&gt;-->
+                        {% for i in obj %}
+                        <div class="col-md-4 blog-item-wrapper">
+
+                            <div class="blog-item">
+                                <div class="blog-img">
+                                    <a href="detail/{{i.id}}"><img src="{{i.image.url}}" alt=""></a>
+                                </div>
+                                <div class="blog-text">
+                                    <div class="blog-tag">
+                                        <a href="detail/{{i.id}}"><h6><small>{{i.category}}</small></h6></a>
+                                    </div>
+                                    <div class="blog-title">
+                                        <a href="detail/{{i.id}}"><h4>{{i.place}}</h4></a>
+                                    </div>
+                                    <div class="blog-meta">
+                                        <p class="blog-date">{{i.date}}</p> /
+                                    </div>
+                                    <div class="blog-desc">
+                                         <a href="detail/{{i.id}}">
+                                        <p style="color:black;">{{i.description|truncatewords:17}}</p>
+                                         </a>
+                                    </div>
+                                    <div class="blog-author">
+                                        <p>{{i.reporter}}</p>
+                                    </div>
+                                    <div class="blog-share-wrapper">
+                                      <div class="buttons" >
+                                            <a href="remove/{{i.id}}"> <span class="fa fa-trash" style="color:red;height:30px;font-size:20px;"></span></a>
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                        <!-- End of Blog Item -->
+                    </div>
+                </div>
+                <!-- End of Blog -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of Client Section -->		<footer class="mastfoot mb-3 bg-white py-4 border-top">
+    <div class="inner container">
+         <div class="row">
+         	<div class="col-md-6 d-flex align-items-center justify-content-md-start justify-content-center">
+         		<p class="mb-0">&copy;All Right Reserved. Design by Shamil.</p>
+         	</div>
+
+            <div class="col-md-6">
+            	<nav class="nav nav-mastfoot justify-content-md-end justify-content-center">
+	                <a class="nav-link" href="#">
+	                	<i class="icon-facebook"></i>
+	                </a>
+	                <a class="nav-link" href="#">
+	                	<i class="icon-twitter"></i>
+	                </a>
+	                <a class="nav-link" href="#">
+	                	<i class="icon-instagram"></i>
+	                </a>
+	                <a class="nav-link" href="#">
+	                	<i class="icon-linkedin"></i>
+	                </a>
+	                <a class="nav-link" href="#">
+	                	<i class="icon-youtube"></i>
+	                </a>
+	                <a class="nav-link" href="#">
+	                	<i class="icon-pinterest"></i>
+	                </a>
+	            </nav>
+            </div>
+
+        </div>
+    </div>
+</footer>
+    </div>
+
+
+	<!-- External JS -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+	<script src="{% static 'vendor/bootstrap/popper.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/bootstrap.min.js' %}"></script>
+	<script src="{% static 'vendor/select2/select2.min.js ' %}"></script>
+	<script src="{% static 'vendor/owlcarousel/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'vendor/isotope/isotope.min.js' %}"></script>
+	<script src="{% static 'vendor/lightcase/lightcase.js' %}"></script>
+	<script src="{% static 'vendor/waypoints/waypoint.min.js' %}"></script>
+	<script src="{% static 'vendor/countTo/jquery.countTo.js' %}"></script>
+
+	<!-- Main JS -->
+	<script src="{% static 'js/app.min.js' %} "></script>
+	<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>
